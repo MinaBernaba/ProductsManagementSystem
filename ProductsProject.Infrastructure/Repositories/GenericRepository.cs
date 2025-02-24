@@ -7,7 +7,6 @@ namespace ProductsProject.Infrastructure.Repositories
 {
     public class GenericRepository<T>(ApplicationDbContext context) : IGenericRepository<T> where T : class
     {
-        #region CRUD
         public virtual IQueryable<T> GetAllNoTracking() => context.Set<T>().AsNoTracking().AsQueryable();
         public virtual IQueryable<T> GetAllAsTracking() => context.Set<T>().AsQueryable();
         public virtual async Task<bool> IsExist(Expression<Func<T, bool>> match) => await context.Set<T>().AnyAsync(match);
@@ -20,9 +19,7 @@ namespace ProductsProject.Infrastructure.Repositories
         public virtual void UpdateRange(IEnumerable<T> entities) => context.Set<T>().UpdateRange(entities);
 
         public virtual void Delete(T entity) => context.Set<T>().Remove(entity);
-
         public virtual void DeleteRange(IEnumerable<T> entities) => context.Set<T>().RemoveRange(entities);
-        #endregion
 
         //public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) => await context.Set<T>().Where(predicate).ToListAsync();
 

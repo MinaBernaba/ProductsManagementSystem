@@ -1,5 +1,6 @@
 #region usings
 using ProductsProject.Core;
+using ProductsProject.Core.MiddleWare;
 using ProductsProject.Infrastructure;
 using ProductsProject.Service;
 #endregion
@@ -31,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseStaticFiles();
 

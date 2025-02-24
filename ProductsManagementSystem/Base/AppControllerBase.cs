@@ -11,7 +11,6 @@ namespace SchoolManagementSystem.api.Base
         private IMediator _mediator;
         public IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
-        #region Actions
         public ObjectResult NewResult<T>(Response<T> response)
         {
             switch (response.StatusCode)
@@ -34,7 +33,6 @@ namespace SchoolManagementSystem.api.Base
                     return new BadRequestObjectResult(response);
             }
         }
-        #endregion
 
 
     }

@@ -9,6 +9,15 @@ namespace ProductsProject.Infrastructure.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductCategory>()
+                .Property(p => p.CreatedOn)
+                .HasDefaultValueSql("GETDATE()");
+
+            base.OnModelCreating(modelBuilder);
         }
         #region Db sets 
 

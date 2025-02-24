@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
 using ProductsProject.Core.CQRS.Countries.Commands.Models;
-using ProductsProject.Infrastructure.Interfaces;
+using ProductsProject.Service.Interfaces;
 
 namespace ProductsProject.Core.CQRS.Countries.Commands.Validators
 {
     public class AddCountryValidator : AbstractValidator<AddCountryCommand>
     {
-        public readonly IUnitOfWork _unitOfWork;
-        public AddCountryValidator(IUnitOfWork unitOfWork)
+        public readonly ICountryService countryService;
+        public AddCountryValidator(ICountryService countryService)
         {
-            _unitOfWork = unitOfWork;
+            this.countryService = countryService;
             ApplyValidationRules();
             ApplyCustomValidationRules();
         }
@@ -28,8 +28,8 @@ namespace ProductsProject.Core.CQRS.Countries.Commands.Validators
         public void ApplyCustomValidationRules()
         {
             RuleFor(x => x.CountryName)
-               .MustAsync(async (countryName, cancellationToken) => !await _unitOfWork.Countries.IsExist(x => x.CountryName.Equals(countryName)))
-               .WithMessage(x => $"The country name: {x.CountryName} exists before!");
+               .MustAsync(async (countryName, cancellationToken) => !await countryService.IsCountryNameExistAsync(countryName))
+               .WithMessage(x => $"The country name {x.CountryName} exists before!");
 
 
         }

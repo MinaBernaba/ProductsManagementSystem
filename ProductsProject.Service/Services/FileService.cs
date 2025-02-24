@@ -27,5 +27,13 @@ namespace ProductsProject.Service.Services
             }
             return $"/{location}/{fileName}";
         }
+        public void DeleteFile(string relativePath)
+        {
+            string fullPath = Path.Combine(webHostEnvironment.WebRootPath, relativePath.TrimStart('/'));
+
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+
+        }
     }
 }

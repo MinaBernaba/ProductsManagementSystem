@@ -7,7 +7,7 @@ namespace ProductsProject.Core.Mapper.CountryMapper
     {
         public void GetCountryInfoMapper()
         {
-            CreateMap<Country, CountryInfo>();
+            CreateMap<Country, CountryInfoResponse>();
         }
     }
 }

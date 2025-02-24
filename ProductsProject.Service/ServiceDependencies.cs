@@ -11,6 +11,10 @@ namespace ProductsProject.Service
 
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<IStateService, StateService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICityService, CityService>();
             return services;
         }
     }
